@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdlib>
+#include <iomanip>
 
 using namespace std;
 
@@ -9,19 +10,21 @@ int main()
     int stored = 1000; // stored value
     bool wantToCont = true;
     char continueChoice;
-
+    
     while (wantToCont) {
         system("cls");
-        cout << "\nexit [0] | add [1] | subtract [2]: "; // main menu
+        cout << setfill('=') << setw(40) << "=";
+        cout << "\n\t\t  Menu\n";
+        cout << setfill('=') << setw(40) << "=";
+        cout << "\n[0]Exit \n[1]Add \n[2]Subtract \n[3]Multiply \n[4]Divide \n[5]Modulus\n\n\nEnter your choice: "; // main menu
         cin >> MDAS;
 
         if (MDAS == 0) {
-            wantToCont = false; // exit the loop
+            wantToCont = false; //exit the loop
             cout << "\nGoodbye!";
             exit(0); // terminate the program
-        }
-        else if (MDAS == 1 || MDAS == 2) {
-            cout << "\nEnter a value: ";
+        } else if (MDAS == 1 || MDAS == 2 || MDAS == 3 || MDAS == 4 || MDAS == 5) {
+            cout << "Enter a value: ";
             cin >> addVal;
 
             switch (MDAS) {
@@ -31,9 +34,19 @@ int main()
             case 2:
                 stored -= addVal;
                 break;
+            case 3:
+                stored *= addVal;
+                break;
+            case 4:
+                stored /= addVal;
+            case 5:
+                stored %= addVal;
+                break;
+            default:
+                "\n\nInvalid input\n\n";
             }
 
-            cout << "\n" << stored << endl;
+            cout << "\nResult: " << stored << endl;
 
             cout << "\nDo you want to continue? (y/n): ";
             cin >> continueChoice;
@@ -43,8 +56,7 @@ int main()
                 cout << "\nGoodbye!";
                 exit(0);
             }
-        }
-        else {
+        } else {
             cout << "Invalid input\n\n";
         }
     }
